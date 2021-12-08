@@ -1,0 +1,115 @@
+﻿@model IEnumerable<BanSach.Models.Sach>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Danh sách sách </h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Danh sách sách</li>
+    </ol>
+    <div class="card mb-12">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <a class="btn btn-success" href="/Sach/Create">Tạo mới</a>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header"><i class="fas fa-table mr-1"></i>Sách </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th width="5%">STT</th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Masach)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tuasach)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Namxb)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Soluong)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Dongia)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.MatgNavigation.Tentg)
+                                    </th>
+
+                                    @*<th>
+                                            @Html.DisplayNameFor(model => model.ManxbNavigation)
+                                        </th>
+
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MatlNavigation)
+                                        </th>*@
+
+                                    <th>
+                                        Ảnh bìa
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            @{
+                                int stt = 1;
+                            }
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td class="text-center">@stt</td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Masach)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Tuasach)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Namxb)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Soluong)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Dongia)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MatgNavigation.Tentg)
+                                    </td>
+                                    @*<td>
+            @Html.DisplayFor(modelItem => item.ManxbNavigation.Manxb)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.MatlNavigation.Matl)
+        </td>*@
+
+
+                                    <td>
+                                        <img src="~/images/@Html.DisplayFor(modelItem => item.Ghichu)" width="150" class="img-thumbnail" />
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Masach">Sửa</a>
+                                        <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Masach">Xem</a>
+                                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Masach">Xóa</a>
+                                    </td>
+                                </tr>
+                                    stt++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<BanSach.Models.ChiTietHd>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Chi tiết hóa đơn</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Chi tiết hóa đơn</li>
+    </ol>
+    <div class="card mb-12">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <a class="btn btn-success" href="/ChiTietHd/Create">Tạo mới</a>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header"><i class="fas fa-table mr-1"></i>Chi tiết hóa đơn</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Soluong)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Dongia)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Thanhtien)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.MahdNavigation)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.MasachNavigation)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Soluong)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Dongia)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Thanhtien)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MahdNavigation.Mahd)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MasachNavigation.Masach)
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Macthd">Sửa</a>
+                                        <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Macthd">Xem</a>
+                                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Macthd">Xóa</a>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

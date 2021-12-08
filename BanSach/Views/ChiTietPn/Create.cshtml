@@ -1,0 +1,60 @@
+﻿@model BanSach.Models.ChiTietPn
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Tạo mới  </h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Tạo mới </li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <a class="btn btn-success" asp-action="Index" asp-controller="ChiTietPn">Về danh sách</a>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Mactpn" class="control-label"></label>
+                        <input asp-for="Mactpn" class="form-control" />
+                        <span asp-validation-for="Mactpn" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Soluong" class="control-label"></label>
+                        <input asp-for="Soluong" class="form-control" />
+                        <span asp-validation-for="Soluong" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Dongia" class="control-label"></label>
+                        <input asp-for="Dongia" class="form-control" />
+                        <span asp-validation-for="Dongia" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Thanhtien" class="control-label"></label>
+                        <input asp-for="Thanhtien" class="form-control" />
+                        <span asp-validation-for="Thanhtien" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Masach" class="control-label"></label>
+                        <select asp-for="Masach" class="form-control" asp-items="ViewBag.Masach"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Mapn" class="control-label"></label>
+                        <select asp-for="Mapn" class="form-control" asp-items="ViewBag.Mapn"></select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

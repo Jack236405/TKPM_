@@ -1,0 +1,60 @@
+﻿@model List<BanSach.Models.CartItem>
+<br />
+<h3>Giỏ hàng của bạn</h3>
+
+@if (Model.Count > 0)
+{
+    int num = 1;        // số thứ tự
+    int amount = 0;     // thành tiền
+    int total = 0;      // tổng tiền
+
+    <table class="table">
+        <tr>
+            <th>STT</th>
+            <th>Sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+            <th></th>
+        </tr>
+        @foreach (var i in Model)
+        {
+            amount = i.Sach.Dongia * i.Soluong;
+            total += amount;
+            <tr class="align-middle">
+                <td>@(num++)</td>
+                <td>
+                    <img src="~/images/@(i.Sach.Ghichu)" class="img-thumbnail" width="50" />
+                    @(i.Sach.Tuasach)
+                </td>
+                <td>@(i.Sach.Dongia.ToString("n0"))</td>
+                <td>
+                    <form asp-action="UpdateItem" method="post">
+                        <div class="row">
+                            <div class="col">
+                                <input name="id" type="hidden" asp-for="@(i.Sach.Masach)" />
+                                <input name="quantity" type="number" asp-for="@(i.Soluong)" class="form-control" />
+                            </div>
+                            <div class="col">
+                                <input class="btn btn-warning" type="submit" value="Cập nhật" />
+                            </div>
+                        </div>
+                    </form>
+                </td>
+                <td>@(amount.ToString("n0"))</td>
+                <td><a asp-action="RemoveItem" asp-route-id="@i.Sach.Masach" class="text-danger"><i class="fa fa-trash"></i></a></td>
+            </tr>
+        }
+        <tr>
+            <td colspan="4" class="text-end">Thành tiền</td>
+            <td colspan="2"><strong class="text-danger">@(total.ToString("n0"))</strong></td>
+        </tr>
+    </table>
+    <div class="text-end">
+        <a class="btn btn-info" asp-action="CheckOut">Thanh toán</a>
+    </div>
+}
+else
+{
+    <p class="alert alert-danger">Giỏ hàng rỗng!</p>
+}

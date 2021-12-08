@@ -1,0 +1,105 @@
+﻿@model List<BanSach.Models.CartItem>
+<br />
+<h3>Vui lòng kiểm tra đầy đủ thông tin trước khi hoàn tất đơn hàng</h3>
+<div class="row">
+
+
+    @using (Html.BeginForm("BanHang", "ChiTietHd", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        if (ViewBag.Message != null)
+        {
+            <div style="border:solid 1px green">
+                @ViewBag.Message
+            </div>
+        }
+
+        <div class="col">
+            <h4 class="text-warning">Thông tin đơn hàng</h4>
+            @if (Model.Count > 0)
+            {
+                int num = 1;        // số thứ tự
+                int amount = 0;     // thành tiền
+                int total = 0;      // tổng tiền
+
+                <table class="table table-bordered">
+                    <tr class="bg-warning align-middle">
+                        <th>STT</th>
+                        <th>Sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+
+                    </tr>
+                    @foreach (var i in Model)
+                    {
+                        amount = i.Sach.Dongia * i.Soluong;
+                        total += amount;
+                        <tr class="align-middle">
+                            <td>@(num++)</td>
+                            <td>
+                                <img src="~/images/@(i.Sach.Ghichu)" class="img-thumbnail" width="50" />
+                                @(i.Sach.Tuasach)
+                            </td>
+                            <td>@(i.Sach.Dongia.ToString("n0"))</td>
+                            <td>
+
+                                @(i.Soluong)
+                            </td>
+                            <td>@(amount.ToString("n0"))</td>
+
+                        </tr>
+                    }
+                    <tr>
+                        <td colspan="4">Thành tiền</td>
+                        <td><strong class="text-danger">@(total.ToString("n0"))</strong></td>
+                    </tr>
+                </table>
+            }
+        </div>
+
+        <div class="col">
+            <h4 class="text-primary">Thông tin khách hàng</h4>
+            <form asp-action="">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label"> Mã khách hàng</label>
+                        <select class="form-control" asp-items="ViewBag.Makh" name="MaNCC"></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"> Họ tên</label>
+                        <select class="form-control" asp-items="ViewBag.Hoten" name=""></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"> Mã nhân viên</label>
+                        <select class="form-control" asp-items="ViewBag.Manv" name="MaNV"></select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label>Họ tên</label>
+                    <input class="form-control" type="text" name="cusname" />
+                </div>
+                <div class="mb-3">
+                    <label>Điện thoại</label>
+                    <input class="form-control" type="text" name="cusphone" />
+                </div>
+                <div class="mb-3">
+                    <label>Địa chỉ</label>
+                    <textarea class="form-control" name="cusadd"></textarea>
+                </div>
+                <div class="mb-3">
+                    <input type="submit" class="btn btn-primary" value="Xác nhận đơn hàng" />
+                </div>
+            </form>
+            
+
+
+
+        </div>
+    }
+</div>
+

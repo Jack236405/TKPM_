@@ -1,0 +1,77 @@
+﻿@model BanSach.Models.Sach
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Sach</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+            <label asp-for="Masach" class="control-label"></label>
+            <input asp-for="Masach" class="form-control" />
+            <span asp-validation-for="Masach" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                <label asp-for="Tuasach" class="control-label"></label>
+                <input asp-for="Tuasach" class="form-control" />
+                <span asp-validation-for="Tuasach" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Namxb" class="control-label"></label>
+                <input asp-for="Namxb" class="form-control" />
+                <span asp-validation-for="Namxb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Soluong" class="control-label"></label>
+                <input asp-for="Soluong" class="form-control" />
+                <span asp-validation-for="Soluong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dongia" class="control-label"></label>
+                <input asp-for="Dongia" class="form-control" />
+                <span asp-validation-for="Dongia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Manxb" class="control-label"></label>
+                <select asp-for="Manxb" class="form-control" asp-items="ViewBag.Manxb"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Matl" class="control-label"></label>
+                <select asp-for="Matl" class="form-control" asp-items="ViewBag.Matl"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Matg" class="control-label"></label>
+                <select asp-for="Matg" class="form-control" asp-items="ViewBag.Matg"></select>
+            </div>
+            @*<div class="form-group">
+            <label asp-for="Ghichu" class="control-label"></label>
+            <input asp-for="Ghichu" class="form-control" />
+            <span asp-validation-for="Ghichu" class="text-danger"></span>
+        </div>*@
+
+            <div class="form-group">
+                <label asp-for="Ghichu" class="control-label"></label>
+                <input type="file" name="file" />
+                <span asp-validation-for="Ghichu" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

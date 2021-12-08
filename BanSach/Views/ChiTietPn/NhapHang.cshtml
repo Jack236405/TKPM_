@@ -1,0 +1,182 @@
+﻿@model List<BanSach.Models.ChiTietPn>
+@{
+    ViewBag.Title = "Insert Bulk Data";
+}
+<style>
+    th {
+        text-align: left;
+    }
+
+    td {
+        padding: 5px;
+    }
+</style>
+
+<h4>Phiếu Nhập</h4>
+<hr />
+
+
+
+
+
+
+<div style="width:700px; padding:5px; background-color:white;">
+    @using (Html.BeginForm("NhapHang", "ChiTietPn", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label"> Mã nhà cung cấp</label>
+                    <select class="form-control" asp-items="ViewBag.Mancc" name="MaNCC"></select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label"> Mã nhân viên</label>
+                    <select class="form-control" asp-items="ViewBag.Manv" name="MaNV"></select>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="form-group" onchange="handleSelectChange(event)">
+                    <label class="control-label"> Mã sách</label>
+                    <select class="form-control" id="chan0" asp-items="ViewBag.Masach" name="asd"></select>
+
+                </div>
+                <div class="form-group" onchange="handleSelectChange2(event)">
+                    <label class="control-label"> Tựa sách</label>
+                    <select class="form-control" id="chan" asp-items="ViewBag.Tuasach" name="asd"></select>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        if (ViewBag.Message != null)
+        {
+            <div style="border:solid 1px green">
+                @ViewBag.Message
+            </div>
+        }
+
+        <div><a href="#" id="addNew">Thêm Dòng</a></div>
+        <table id="dataTable" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Mã Sách</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th>
+
+                <th></th>
+            </tr>
+            @if (Model != null && Model.Count > 0)
+            {
+                int j = 0;
+                foreach (var i in Model)
+                {
+
+                    <tr style="border:1px solid black">
+                        <td>@Html.TextBoxFor(a => a[j].Masach)</td>
+                        <td>@Html.TextBoxFor(a => a[j].Soluong, new { @onchange = "onchangeevent();" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].Dongia, new { @onchange = "onchangeevent();" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].Thanhtien, new { id = "id" })</td>
+
+                        <td>
+                            @if (j > 0)
+                            {
+                                <a href="#" class="remove">Xóa</a>
+                            }
+                        </td>
+                    </tr>
+                    j++;
+                }
+            }
+        </table>
+        @*<input type="submit" value="Lưu" />*@
+        <button type="submit" class="btn btn-primary">Lưu</button>
+    }
+</div>
+
+@* Here I will add Jquery Code for validation / dynamically add new rows / Remove rows etc *@
+
+@section Scripts{
+
+    <script language="javascript">
+                $(document).ready(function () {
+                    // document.forms['0']['[i].Thanhtien'].value = document.forms['0']['[i].Soluong'].value * document.forms['0']['[i].Dongia'].value;
+                    //1. Add new row
+                    $("#addNew").click(function (e) {
+
+                        //new
+                        $(document).change(function () {
+                            for (var i = 0; i < 10; i++) {
+                                document.forms['0']['[' + i + '].Thanhtien'].value = document.forms['0']['[' + i + '].Soluong'].value * document.forms['0']['[' + i + '].Dongia'].value;
+                            }
+                        });
+
+                        e.preventDefault();
+                        var $tableBody = $("#dataTable");
+                        var $trLast = $tableBody.find("tr:last");
+                        var $trNew = $trLast.clone();
+
+                        var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+                        $trNew.find("td:last").html('<a href="#" class="remove">Remove</a>');
+                        $.each($trNew.find(':input'), function (i, val) {
+                            // Replaced Name
+                            var oldN = $(this).attr('name');
+                            var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
+                            $(this).attr('name', newN);
+                            //Replaced value
+                            var type = $(this).attr('type');
+                            if (type.toLowerCase() == "text") {
+                                $(this).attr('value', '');
+                            }
+
+                            // If you have another Type then replace with default value
+                            $(this).removeClass("input-validation-error");
+
+                        });
+                        $trLast.after($trNew);
+
+                        // Re-assign Validation
+                        var form = $("form")
+                            .removeData("validator")
+                            .removeData("unobtrusiveValidation");
+                        $.validator.unobtrusive.parse(form);
+
+
+                    });
+
+                    // 2. Remove
+                    $('a.remove').live("click", function (e) {
+                        e.preventDefault();
+                        $(this).parent().parent().remove();
+                    });
+                });
+
+                function onchangeevent() {
+                    document.getElementById('id').value = "null";
+                }
+    </script>
+}
+
+
+<script>
+
+    function handleSelectChange(event) {
+
+        var selectElement = event.target;
+        var value = selectElement.value;
+        document.getElementById("chan").value = value;
+    }
+
+    function handleSelectChange2(event) {
+        var selectElement = event.target;
+        var value = selectElement.value;
+        document.getElementById("chan0").value = value;
+    }
+</script>

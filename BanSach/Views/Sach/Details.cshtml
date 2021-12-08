@@ -1,0 +1,70 @@
+﻿@model BanSach.Models.Sach
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Chi tiết</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Chi tiết</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <a class="btn btn-success" asp-action="Index" asp-controller="Sach">Về danh sách</a>
+        </div>
+
+        <div>
+            <h4>Sach</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Tuasach)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Tuasach)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Namxb)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Namxb)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Soluong)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Soluong)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Ghichu)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Ghichu)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ManxbNavigation)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ManxbNavigation.Manxb)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.MatgNavigation)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.MatgNavigation.Matg)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.MatlNavigation)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.MatlNavigation.Matl)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model.Masach">Edit</a> |
+        </div>
+        </div>
+    </div>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BanSach.Models.Sach>
+
+@{
+    ViewData["Title"] = "Trang chính";
+}
+
+<br />
+<h3 class="text-primary">Danh sách sản phẩm</h3>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-3">
+            <div class="card text-center m-2 shadow">
+                <div class="card-header bg-info">
+                    <strong>
+                        <a class="text-decoration-none text-white" asp-action="Details" asp-route-id="@item.Masach">
+                            @Html.DisplayFor(modelItem => item.Tuasach@*Dongia*@)
+                        </a>
+                    </strong>
+                </div>
+                <div class="card-body">
+                    <a asp-action="Details" asp-route-id="@item.Masach">
+                        <img src="~/images/@Html.DisplayFor(modelItem => item.Ghichu)" style="max-width:100%"/>
+                    </a>
+                    <span class="text-danger">
+                        <strong>
+                            @Html.DisplayFor(modelItem => item.Dongia)
+                        </strong>
+                    </span>
+                </div>
+                <div class="card-footer bg-light">
+                    <a class="btn btn-success" asp-action="Details" asp-route-id="@item.Masach">
+                        Chi tiết
+                    </a>
+                    <a class="btn btn-warning" asp-action="AddToCart" asp-route-id="@item.Masach">
+                        <i class="fa fa-shopping-cart"></i> Mua
+                    </a>
+                </div>
+                <div class="card-footer bg-light">
+                    <strong>
+                        Còn Lại: @Html.DisplayFor(modelItem => item.Soluong)
+                    </strong>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="text-center text-primary">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+</div>

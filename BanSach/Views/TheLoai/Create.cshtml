@@ -1,0 +1,47 @@
+﻿@model BanSach.Models.TheLoai
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Tạo mới  Thể Loại></h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Tạo mới Thể Loại</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <a class="btn btn-success" asp-action="Index" asp-controller="TheLoai">Về danh sách</a>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @*<div class="form-group">
+                            <label asp-for="Matl" class="control-label"></label>
+                            <input asp-for="Matl" class="form-control" />
+                            <span asp-validation-for="Matl" class="text-danger"></span>
+                        </div>*@
+                    <div class="form-group">
+                        <label asp-for="Tentl" class="control-label"></label>
+                        <input asp-for="Tentl" class="form-control" />
+                        <span asp-validation-for="Tentl" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Ghichu" class="control-label"></label>
+                        <input asp-for="Ghichu" class="form-control" />
+                        <span asp-validation-for="Ghichu" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
