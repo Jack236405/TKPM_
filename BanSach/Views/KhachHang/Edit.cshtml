@@ -4,39 +4,43 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>KhachHang</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Makh" />
-            <div class="form-group">
-                <label asp-for="Hoten" class="control-label"></label>
-                <input asp-for="Hoten" class="form-control" />
-                <span asp-validation-for="Hoten" class="text-danger"></span>
+<div class="container-fluid">
+    <h1 class="mt-4">Chỉnh sủa Khách hàng</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Chỉnh sửa Khách hàng</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <a class="btn btn-success" asp-action="Index" asp-controller="KhachHang">Về danh sách</a>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Makh" />
+                    <div class="form-group">
+                        <label asp-for="Hoten" class="control-label"></label>
+                        <input asp-for="Hoten" class="form-control" />
+                        <span asp-validation-for="Hoten" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Diachi" class="control-label"></label>
+                        <input asp-for="Diachi" class="form-control" />
+                        <span asp-validation-for="Diachi" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Dienthoai" class="control-label"></label>
+                        <input asp-for="Dienthoai" class="form-control" />
+                        <span asp-validation-for="Dienthoai" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Lưu" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Diachi" class="control-label"></label>
-                <input asp-for="Diachi" class="form-control" />
-                <span asp-validation-for="Diachi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Dienthoai" class="control-label"></label>
-                <input asp-for="Dienthoai" class="form-control" />
-                <span asp-validation-for="Dienthoai" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -4,35 +4,41 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<div class="container-fluid">
+    <h1 class="mt-4">Chỉnh sửa Tác Giả</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Home">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Chỉnh sửa Tác Giả</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <a class="btn btn-success" asp-action="Index" asp-controller="TacGia">Về danh sách</a>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Matg" />
+                    <div class="form-group">
+                        <label asp-for="Tentg" class="control-label"></label>
+                        <input asp-for="Tentg" class="form-control" />
+                        <span asp-validation-for="Tentg" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Ghichu" class="control-label"></label>
+                        <input asp-for="Ghichu" class="form-control" />
+                        <span asp-validation-for="Ghichu" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Lưu" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
 
-<h4>TacGia</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Matg" />
-            <div class="form-group">
-                <label asp-for="Tentg" class="control-label"></label>
-                <input asp-for="Tentg" class="form-control" />
-                <span asp-validation-for="Tentg" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ghichu" class="control-label"></label>
-                <input asp-for="Ghichu" class="form-control" />
-                <span asp-validation-for="Ghichu" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
